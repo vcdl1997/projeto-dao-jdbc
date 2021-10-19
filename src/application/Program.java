@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import db.DB;
@@ -38,7 +39,14 @@ public class Program {
 			Seller seller2 = sellerDaoJdbc.findById(1);
 			System.out.println(seller2.toString());
 			System.out.println("seller successfully located!\n");
-
+			
+			List<Seller> list = sellerDaoJdbc.findAll();
+			list.forEach(x -> System.out.println(x.toString()));
+			System.out.println("records listed successfully!\n");
+			
+			sellerDaoJdbc.deleteById(1);
+			System.out.println("record deleted successfully!\n");
+			
 			conn.commit();
 		}catch(SQLException e) {
 			

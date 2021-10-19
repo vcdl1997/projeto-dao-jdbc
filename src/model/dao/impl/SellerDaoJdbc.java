@@ -88,6 +88,7 @@ public class SellerDaoJdbc implements Dao<Seller>{
 			rs.first();
 			
 			return new Seller(
+				rs.getInt("Id"),
 				rs.getString("Name"),
 				rs.getString("Email"),
 				rs.getDate("BirthDate"),
@@ -111,8 +112,9 @@ public class SellerDaoJdbc implements Dao<Seller>{
 		try {
 			st = this.conn.createStatement();
 			rs = st.executeQuery(""
-				+ "SELECT s.*, d.Id as DepartmentId, d.Name as DepartmentName "
+				+ "SELECT s.*, d.Name as DepartmentName "
 				+ "FROM seller as s "
+				+ "INNER JOIN department as d ON d.Id = s.DepartmentId"
 			);
 			
 			List<Seller> listSeller = new ArrayList<>();
